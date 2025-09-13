@@ -1,0 +1,431 @@
+:root {
+  --light-bg: #f8f9fa; /* Lighter grey for light mode */
+  --dark-bg: #202124;  /* Google dark grey */
+  --light-surface: #ffffff;
+  --dark-surface: #2d2e30; /* Slightly lighter dark surface */
+  --light-text-primary: #202124;
+  --dark-text-primary: #e8eaed; /* Google dark mode text */
+  --light-text-secondary: #5f6368;
+  --dark-text-secondary: #bdc1c6; /* Google dark mode secondary text */
+  --light-primary: #1a73e8; /* Google Blue */
+  --dark-primary: #8ab4f8; /* Lighter Google Blue for dark mode */
+  --light-primary-hover: #185abc;
+  --dark-primary-hover: #aecbfa;
+  --light-border: #dadce0;
+  --dark-border: #5f6368;
+  --light-error: #d93025;
+  --dark-error: #f28b82;
+  --light-disabled-bg: #e0e0e0;
+  --dark-disabled-bg: #3c4043;
+  --light-disabled-text: #a0a0a0;
+  --dark-disabled-text: #7f8184;
+  --light-shadow-color-1: rgba(60, 64, 67, 0.15);
+  --dark-shadow-color-1: rgba(0, 0, 0, 0.3);
+  --light-shadow-color-2: rgba(60, 64, 67, 0.1);
+  --dark-shadow-color-2: rgba(0, 0, 0, 0.2);
+   --light-focus-shadow-color: rgba(26, 115, 232, 0.2);
+  --dark-focus-shadow-color: rgba(138, 180, 248, 0.3);
+  --light-button-focus-shadow-color: rgba(26, 115, 232, 0.3);
+  --dark-button-focus-shadow-color: rgba(138, 180, 248, 0.4);
+  --light-button-text: white;
+  --dark-button-text: var(--dark-bg); /* Use dark background for text on light blue */
+  /* --- New Card Styles --- */
+  --flashcard-width: 280px;
+  --flashcard-height: 180px;
+  --focus-flashcard-width: 500px;
+  --focus-flashcard-height: 320px;
+  --focus-term-font-size: 2.2em;
+  --focus-definition-font-size: 1.6em;
+  --card-text-color: #ffffff;
+  --card-text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  /* --- Gradient Colors --- */
+  --grad-1-start: #84fab0;
+  --grad-1-end: #8fd3f4;
+  --grad-2-start: #a18cd1;
+  --grad-2-end: #fbc2eb;
+  --grad-3-start: #ff85a1;
+  --grad-3-end: #ff9a8b;
+  --grad-4-start: #f6d365;
+  --grad-4-end: #fda085;
+  --grad-5-start: #4facfe;
+  --grad-5-end: #00f2fe;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+body {
+  font-family: 'Google Sans', Roboto, Arial, sans-serif;
+  margin: 0;
+  background-color: light-dark(var(--light-bg), var(--dark-bg));
+  color: light-dark(var(--light-text-primary), var(--dark-text-primary));
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.container {
+  background-color: light-dark(var(--light-surface), var(--dark-surface));
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px light-dark(var(--light-shadow-color-1), var(--dark-shadow-color-1)),
+              0 4px 8px light-dark(var(--light-shadow-color-2), var(--dark-shadow-color-2));
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+h1 {
+  color: light-dark(var(--light-primary), var(--dark-primary));
+  margin-bottom: 15px;
+  font-size: 2em;
+  font-weight: 500;
+}
+
+p {
+  margin-bottom: 25px;
+  color: light-dark(var(--light-text-secondary), var(--dark-text-secondary));
+  line-height: 1.6;
+}
+
+textarea {
+  width: calc(100% - 22px);
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid light-dark(var(--light-border), var(--dark-border));
+  border-radius: 8px;
+  font-size: 16px;
+  min-height: 120px;
+  background-color: light-dark(var(--light-bg), var(--dark-bg));
+  color: light-dark(var(--light-text-primary), var(--dark-text-primary));
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: light-dark(var(--light-primary), var(--dark-primary));
+  box-shadow: 0 0 0 2px light-dark(var(--light-focus-shadow-color), var(--dark-focus-shadow-color));
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+button {
+  background-color: light-dark(var(--light-primary), var(--dark-primary));
+  color: light-dark(var(--light-button-text), var(--dark-button-text));
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease, border-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 1px 2px light-dark(var(--light-shadow-color-2), var(--dark-shadow-color-2));
+}
+
+button:hover {
+  background-color: light-dark(var(--light-primary-hover), var(--dark-primary-hover));
+  box-shadow: 0 1px 3px light-dark(var(--light-shadow-color-1), var(--dark-shadow-color-1));
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px light-dark(var(--light-button-focus-shadow-color), var(--dark-button-focus-shadow-color));
+}
+
+button:disabled {
+  background-color: light-dark(var(--light-disabled-bg), var(--dark-disabled-bg));
+  color: light-dark(var(--light-disabled-text), var(--dark-disabled-text));
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.secondary-button {
+  background-color: transparent;
+  color: light-dark(var(--light-primary), var(--dark-primary));
+  border: 2px solid light-dark(var(--light-border), var(--dark-border));
+  padding: 12px 22px;
+}
+
+.secondary-button:hover {
+  background-color: light-dark(rgba(26, 115, 232, 0.08), rgba(138, 180, 248, 0.12));
+  border-color: light-dark(var(--light-primary), var(--dark-primary));
+}
+
+.secondary-button:disabled {
+  background-color: transparent;
+  border-color: light-dark(var(--light-disabled-bg), var(--dark-disabled-bg));
+  color: light-dark(var(--light-disabled-text), var(--dark-disabled-text));
+  box-shadow: none;
+}
+
+.error-message {
+  color: light-dark(var(--light-error), var(--dark-error));
+  margin-top: 20px;
+  font-weight: 500;
+  min-height: 1.5em;
+}
+
+.flashcards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 10px;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.focus-nav {
+  /*
+    The 'display' property is now applied in the rule below.
+    This prevents this rule's 'display: flex' from overriding the
+    'display: none' that comes from the [hidden] attribute.
+  */
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+  color: light-dark(var(--light-text-secondary), var(--dark-text-secondary));
+}
+
+/* This more specific rule applies display:flex ONLY when the nav is NOT hidden. */
+#focusNav:not([hidden]) {
+  display: flex;
+}
+
+.nav-button {
+  background-color: light-dark(var(--light-bg), var(--dark-bg));
+  color: light-dark(var(--light-text-primary), var(--dark-text-primary));
+  border: 1px solid light-dark(var(--light-border), var(--dark-border));
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0;
+  box-shadow: 0 1px 2px light-dark(var(--light-shadow-color-2), var(--dark-shadow-color-2));
+}
+
+.nav-button:hover {
+    background-color: light-dark(var(--light-disabled-bg), var(--dark-disabled-bg));
+    border-color: light-dark(var(--light-text-secondary), var(--dark-text-secondary));
+}
+
+#cardCounter {
+  font-size: 1.1em;
+  font-weight: 500;
+  min-width: 60px; /* Prevent layout shift */
+  text-align: center;
+}
+
+/* --- Focus Mode Styles --- */
+.flashcards-container.focus-mode {
+  flex-wrap: nowrap;
+  min-height: calc(var(--focus-flashcard-height) + 20px); /* Prevent layout jump */
+}
+
+.flashcards-container.focus-mode .flashcard {
+  display: none;
+}
+
+.flashcards-container.focus-mode .flashcard.active {
+  display: block;
+  width: var(--focus-flashcard-width);
+  height: var(--focus-flashcard-height);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.flashcards-container.focus-mode .flashcard.active .emoji {
+  font-size: 4.5em;
+}
+
+.flashcards-container.focus-mode .flashcard.active .term {
+  font-size: var(--focus-term-font-size);
+}
+
+.flashcards-container.focus-mode .flashcard.active .definition {
+  font-size: var(--focus-definition-font-size);
+}
+
+.flashcard {
+  position: relative; /* Needed for positioning the delete button */
+  background-color: transparent;
+  width: var(--flashcard-width);
+  height: var(--flashcard-height);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  perspective: 1000px;
+  box-shadow: none;
+  transition: opacity 0.3s ease, transform 0.3s ease, width 0.4s ease, height 0.4s ease; /* For removal animation and resizing */
+}
+
+.flashcard.removing {
+  opacity: 0;
+  transform: scale(0.9) rotate(5deg);
+  pointer-events: none;
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s, box-shadow 0.3s;
+  transform-style: preserve-3d;
+  box-shadow: 0 2px 8px light-dark(var(--light-shadow-color-1), var(--dark-shadow-color-1));
+  border-radius: 10px; /* Apply border-radius here */
+}
+
+.flashcard.flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: none;
+}
+
+.flashcard-back {
+  transform: rotateY(180deg);
+}
+
+/* --- Card Gradients --- */
+.flashcard:nth-child(5n + 1) .flashcard-front,
+.flashcard:nth-child(5n + 1) .flashcard-back {
+  background-image: linear-gradient(135deg, var(--grad-1-start), var(--grad-1-end));
+}
+
+.flashcard:nth-child(5n + 2) .flashcard-front,
+.flashcard:nth-child(5n + 2) .flashcard-back {
+  background-image: linear-gradient(135deg, var(--grad-2-start), var(--grad-2-end));
+}
+
+.flashcard:nth-child(5n + 3) .flashcard-front,
+.flashcard:nth-child(5n + 3) .flashcard-back {
+  background-image: linear-gradient(135deg, var(--grad-3-start), var(--grad-3-end));
+}
+
+.flashcard:nth-child(5n + 4) .flashcard-front,
+.flashcard:nth-child(5n + 4) .flashcard-back {
+  background-image: linear-gradient(135deg, var(--grad-4-start), var(--grad-4-end));
+}
+
+.flashcard:nth-child(5n + 5) .flashcard-front,
+.flashcard:nth-child(5n + 5) .flashcard-back {
+  background-image: linear-gradient(135deg, var(--grad-5-start), var(--grad-5-end));
+}
+
+.flashcard:hover .flashcard-inner {
+  box-shadow: 0 6px 16px light-dark(var(--light-shadow-color-1), var(--dark-shadow-color-1));
+  transform: translateY(-5px) scale(1.02);
+}
+
+.flashcard.flipped:hover .flashcard-inner {
+  transform: rotateY(180deg) translateY(-5px) scale(1.02);
+}
+
+.delete-card-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 5; /* Sit on top of the flipping card */
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 0 2px 0; /* Better vertical alignment for '×' */
+  box-sizing: border-box;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.delete-card-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.delete-card-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px var(--light-primary);
+}
+
+.emoji {
+  font-size: 3em;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: font-size 0.4s ease;
+}
+
+.term {
+  font-size: 1.4em;
+  font-weight: 500;
+  color: var(--card-text-color);
+  text-shadow: var(--card-text-shadow);
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: font-size 0.4s ease;
+}
+
+.definition {
+  font-size: 1.1em;
+  color: var(--card-text-color);
+  text-shadow: var(--card-text-shadow);
+  line-height: 1.4;
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: font-size 0.4s ease;
+}
+
+footer {
+  margin-top: 50px;
+  padding-top: 25px;
+  border-top: 1px solid light-dark(var(--light-border), var(--dark-border));
+  color: light-dark(var(--light-text-secondary), var(--dark-text-secondary));
+  font-size: 0.9em;
+}
